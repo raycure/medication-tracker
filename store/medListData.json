@@ -1,0 +1,335 @@
+{
+	"Famodin": {
+		"picture": " https://alturathmedical.com/product/famodin-famotidine/#product-gallery",
+		"quantity": "20",
+		"expireDate": "1-2yıl",
+		"sideEffect": ["Mide bulantısı", "Baş ağrısı"],
+		"toConsider": ["Aç karna almayın.", "Sabah saatlerinde almayın."]
+	},
+
+	"Metformin": {
+		"picture": "https://www.myhealthexplained.com/diabetes-information/diabetes-articles/benefits-of-metformin-a-wonder-drug",
+		"quantity": "84",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Karın ağrısı", "İshal"],
+		"toConsider": [
+			"Tokken kullanınız.",
+			"Bu ilacı kullandıktan sonra ağır egzersizlerden kaçınınız."
+		]
+	},
+
+	"Paracetamol": {
+		"picture": "https://almostadoctor.co.uk/encyclopedia/paracetamol",
+		"quantity": "16",
+		"expireDate": "1-3 yıl",
+		"sideEffect": ["Baş ağrısı", "Karın ağrısı"],
+		"toConsider": [
+			"Aç karna almayın.",
+			"Sabah saatlerinde almayın.",
+			"Bu ilacı aldıktan sonra alkol tüketmeyiniz."
+		]
+	},
+
+	"Ibuprofen": {
+		"picture": "https://www.medicinedirect.co.uk/chronic-conditions/arthritis/ibuprofen",
+		"quantity": "48",
+		"expireDate": "1-5 yıl",
+		"sideEffect": ["Baş ağrısı", "Mide bulantısı"],
+		"toConsider": [
+			"Aç karna almayınız.",
+			"Bu ilacı aldıktan sonra araç kullanmayınız."
+		]
+	},
+
+	"Amoxicillin": {
+		"picture": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Amoxicillin.JPG",
+		"quantity": "21",
+		"expireDate": "2 yıl",
+		"sideEffect": ["İshal", "Cilt döküntüsü"],
+		"toConsider": ["Aç karna kullanılabilir.", "Bol su ile tüketiniz."]
+	},
+
+	"Setizin": {
+		"picture": "https://alturathmedical.com/product/cetizin-cetirizine-hydrochloride/#product-gallery",
+		"quantity": "20",
+		"expireDate": "30 gün",
+		"sideEffect": ["Uykusuzluk", "Ağız kuruluğu"],
+		"toConsider": [
+			"Yatmadan önce alınız.",
+			"Alkol ile birlikte almayınız.",
+			"Araç kullanırken dikkatli olunuz."
+		]
+	},
+
+	"Furosemid": {
+		"picture": "https://www.asiapharma-syria.com/en/product-details/168/Furosemid",
+		"quantity": "20",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Baş ağrısı", "karın ağrısı"],
+		"toConsider": ["Araç kulanırken dikkatli olunuz."]
+	},
+
+	"Asprin": {
+		"picture": "https://www.dreamstime.com/stock-photos-aspirin-image18931443",
+		"quantity": "20",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Mide kanaması, alerjik reaksiyon."],
+		"toConsider": ["Açken kullanmayanız."]
+	},
+
+	"Wafarin": {
+		"picture": "https://mcareexports.com/our-products/warfarin-2mg-tablet/",
+		"quantity": "28",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Kanama riski, morluklar"],
+		"toConsider": ["Açken kullanmayanız."]
+	},
+
+	"Alendronat": {
+		"picture": "https://www.myhealthshop.ch/fr/Alendronat-Zentiva-comprimes-hebdomadaires-70-mg-12-pce/7787485",
+		"quantity": "12",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Mide rahatsızlığı", "Çene kemik sorunları"],
+		"toConsider": ["Doktor tav siyesi ile kullanınız."]
+	},
+
+	"Amlodipin": {
+		"picture": "https://tkilac.com/urun/amlipin-5-10-mg-film-tablet/",
+		"quantity": "30",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Baş dönmesi"],
+		"toConsider": ["Ani hareketlerden kaçının."]
+	},
+
+	"Lisinopiril": {
+		"picture": "https://www.indiamart.com/proddetail/lisinopril-20-mg-tablet-11553077773.html",
+		"quantity": "64",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Kuru öksürük, Baş dönmesi"],
+		"toConsider": ["Tansiyon takibi yapınız."]
+	},
+
+	"Levotiroksin": {
+		"picture": "https://www.hekimce.com/blog/ilac-rehberi/levotiron",
+		"quantity": "20",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Çarpıntı"],
+		"toConsider": ["Aç karna almayınız."]
+	},
+
+	"Bisoprolol": {
+		"picture": "https://medecify.com/storages/2024/07/IMG-548-scaled.jpeg",
+		"quantity": "28",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Yorgunluk"],
+		"toConsider": ["Ani kullanımı bırakılmamalıdır. "]
+	},
+
+	"İnsulin": {
+		"picture": "https://tr.wikipedia.org/wiki/%C4%B0ns%C3%BClin_%28ila%C3%A7%29#/media/Dosya:Inzul%C3%ADn.jpg",
+		"quantity": "1",
+		"expireDate": "6 ay",
+		"sideEffect": ["Hipoglisemi"],
+		"toConsider": ["Kan şekeri takibi yapınız."]
+	},
+
+	"Duxet": {
+		"picture": "https://www.nobel.com.tr/urunler/ilaclar/duxet-30mg-28-kapsul",
+		"quantity": "28",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Baş dönmesi", "Ağız kuruluğu"],
+		"toConsider": ["Düzenli kullanınız."]
+	},
+
+	"Perlinganit": {
+		"picture": "https://www.hekimce.com/blog/ilac-rehberi/perlinganit",
+		"quantity": "10",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Baş dönmesi"],
+		"toConsider": ["Ani hareketler yapmayınız."]
+	},
+
+	"Donepezil": {
+		"picture": "https://www.indiamart.com/proddetail/donepezil-10mg-tablet-11408737730.html",
+		"quantity": "20",
+		"expireDate": "1 yıl",
+		"sideEffect": ["İshal", "İştahsızlık"],
+		"toConsider": ["Gece kullanmayın."]
+	},
+
+	"Selectra": {
+		"picture": "https://www.antalyaterapimerkezi.com/selectra-nedir/",
+		"quantity": "28",
+		"expireDate": "1-yıl",
+		"sideEffect": ["Uykusuzluk"],
+		"toConsider": ["Etkisi birkaç kullanım sonrası ortayaçıkar. "]
+	},
+
+	"Spironolaktan": {
+		"picture": "https://shemopharm.com/wp-content/uploads/2024/08/9663-removebg-preview-1.png",
+		"quantity": "40",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Hiperkalemi"],
+		"toConsider": ["Potasyum takviyesinden kaçının."]
+	},
+
+	"Pantopranzol": {
+		"picture": "https://meinarztbedarf.com/cdn/shop/files/6486311_974c6ca5-2417-4060-86ce-23267a3cb169_700x700.jpg?v=1720029962",
+		"quantity": "14",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Mide bulantısı"],
+		"toConsider": ["Doktor tavsiyesi ile kullanınız."]
+	},
+
+	"Levotiron": {
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1669486220.jpg ",
+		"quantity": "50",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Çarpıntı", "Kilo kaybı"],
+		"toConsider": ["Aç karna alın."]
+	},
+
+	"Clopidogrel": {
+		"picture": " https://advantagepharma.africa/wp-content/uploads/2023/10/clopidogrel.png",
+		"quantity": "28",
+		"expireDate": "1-2yıl",
+		"sideEffect": ["Mide bulantısı"],
+		"toConsider": ["Doktor tavsiyesi ile kullanınız. "]
+	},
+
+	"Allopurinol": {
+		"picture": "https://4yfweck668yj.b-cdn.net/w_1200/wpjuiuz0at-0029462-allopurinol-300mg-30tb.jpg ",
+		"quantity": "30",
+		"expireDate": "3 yıl",
+		"sideEffect": ["Deri döküntüsü"],
+		"toConsider": ["Bol su içiniz."]
+	},
+
+	"Loratadin": {
+		"picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQpWWv2FlJZIJVg3kjvz_LR1_kdWO7dwpVdA&s",
+		"quantity": "20",
+		"expireDate": "1 yıl",
+		"sideEffect": ["İshal", "Baş ağrısı"],
+		"toConsider": ["Doktorunuza danışın."]
+	},
+
+	"Tamsulosin": {
+		"picture": " https://image.made-in-china.com/2f0j00bvCiPjVMrhfB/GMP-Certified-Tamsulosin-Hydrochloride-Capsules-0-4mg.webp",
+		"quantity": "30",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Mide bulantısı", "Baş dönmesi"],
+		"toConsider": ["Tok karna içiniz."]
+	},
+
+	"Esomeprazol": {
+		"picture": "https://medekpharma.com/wp-content/uploads/2023/09/MEDEK-IMAGENES-DE-PRODUTOS-WEB-28.png",
+		"quantity": "70",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Baş ağrısı"],
+		"toConsider": ["Tansiyon kontrolü yapınız."]
+	},
+
+	"Spylacton": {
+		"picture": "https://tkilac.com/wp-content/uploads/600x600_spylacton-2.png",
+		"quantity": "30",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Hiperkalemi"],
+		"toConsider": ["Sabah saatlerinde almayın."]
+	},
+
+	"Rivoksar": {
+		"picture": "https://www.yerlituket.com/images/product/rivoksar-10-mg-10-tablet.jpg",
+		"quantity": "10",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Karın ağrısı"],
+		"toConsider": ["Doktorunuza danışmadan kullanmayınız."]
+	},
+
+	"Omeprozol": {
+		"picture": " https://meinarztbedarf.com/cdn/shop/files/6113366_0da99463-c1bc-4af3-a450-3249e4caec1e_700x700.jpg?v=1720029949",
+		"quantity": "14",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Mide ağrısı", "Baş ağrısı"],
+		"toConsider": ["Uzun süre kullanmayınız."]
+	},
+
+	"Paxil": {
+		"picture": " https://cdn.hekimce.com/uploads/2022/basliksiz-1-1668368826.jpg",
+		"quantity": "28",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Ağız kuruluğu"],
+		"toConsider": ["Kullanmayı aniden bırakmayınız."]
+	},
+
+	"Lansazol": {
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1669688687.jpg",
+		"quantity": "28",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Mide bulantısı", "Baş ağrısı"],
+		"toConsider": ["Aç karna almayın."]
+	},
+
+	"Diltiazem": {
+		"picture": "https://5.imimg.com/data5/SELLER/Default/2023/8/337358845/KD/WK/TI/7034457/new-product.jpeg",
+		"quantity": "30",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Yorgunluk"],
+		"toConsider": ["Kullandıktan sonra tansiyon kontrolü yapılmalıdır."]
+	},
+
+	"Digoksin": {
+		"picture": "https://assospharma.com/wp-content/uploads/2021/02/digoxin-assos-025mg-tablet.jpg",
+		"quantity": "50",
+		"expireDate": "2 yıl",
+		"sideEffect": ["Mide bulantısı"],
+		"toConsider": ["Kan seviyenizi kontrol ettiriniz."]
+	},
+
+	"HCTZ": {
+		"picture": "https://www.assetpharmacy.com/wp-content/uploads/2022/06/Hydrochlorothiazide-25mg-Tablets-1-600x600.jpg ",
+		"quantity": "200",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Baş dönmesi"],
+		"toConsider": ["Akşam saatlerinde almayın."]
+	},
+
+	"Provastatin": {
+		"picture": "https://res.cloudinary.com/zava-www-uk/image/upload/fl_progressive/a_exif,f_auto,e_sharpen:100,c_fit,w_1080,h_810,q_70,fl_lossy/v1707220222/sd/uk/services-setup/high-cholesterol-unit/pravastatin/cijvyjqjj60v3pn3m5wq.png",
+		"quantity": "28",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Kas ağrısı"],
+		"toConsider": ["Doktor tavsiyesiyle kullanınız."]
+	},
+
+	"Atorvastatin": {
+		"picture": "https://www.meldinpharma.com/shop/ucom-wdt-01-atorvastatin-tab-10mg-28-s-wockhardt-5171#attribute_values= ",
+		"quantity": "28",
+		"expireDate": "1-2 yıl",
+		"sideEffect": [" Kas ağrısı"],
+		"toConsider": ["Aç karna almayın.", "Sabah saatlerinde almayın. "]
+	},
+
+	"Losartan": {
+		"picture": " https://globelapharma.com/product/losartan/",
+		"quantity": "30",
+		"expireDate": "2 yıl",
+		"sideEffect": [" Baş ağrısı"],
+		"toConsider": ["Bol su tüketiniz. "]
+	},
+
+	"Nebivolol": {
+		"picture": "https://www.medsforless.co.uk/wp-content/uploads/2023/04/Nebivolol.jpg",
+		"quantity": "28",
+		"expireDate": "1 yıl",
+		"sideEffect": ["Düşük tansiyon."],
+		"toConsider": ["Açken kullanınız."]
+	},
+
+	"Gabapentin": {
+		"picture": " https://medecify.com/product/gabapentin-300mg-capsules-x100/",
+		"quantity": "100",
+		"expireDate": "1-2 yıl",
+		"sideEffect": ["Uykusuzluk"],
+		"toConsider": ["Kullandıktan sonra araç kullanmayınız."]
+	}
+}
