@@ -1,6 +1,6 @@
 {
 	"Famodin": {
-		"picture": " https://alturathmedical.com/product/famodin-famotidine/#product-gallery",
+		"picture": "https://alturathmedical.com/wp-content/uploads/2020/01/081039.jpg",
 		"quantity": "20",
 		"expireDate": "1-2yıl",
 		"sideEffect": ["Mide bulantısı", "Baş ağrısı"],
@@ -8,7 +8,7 @@
 	},
 
 	"Metformin": {
-		"picture": "https://www.myhealthexplained.com/diabetes-information/diabetes-articles/benefits-of-metformin-a-wonder-drug",
+		"picture": "https://images.ctfassets.net/4w8qvp17lo47/36aCkc13mwOuumQ2seygc4/e2e002b451a77e75e6fd98857df4b9eb/pregnancy-metformin-is-it-safe_thumb.jpg",
 		"quantity": "84",
 		"expireDate": "2 yıl",
 		"sideEffect": ["Karın ağrısı", "İshal"],
@@ -19,7 +19,7 @@
 	},
 
 	"Paracetamol": {
-		"picture": "https://almostadoctor.co.uk/encyclopedia/paracetamol",
+		"picture": "https://almostadoctor.co.uk/wp-content/uploads/2017/06/25CD8903-B258-43B1-90C3-34FA58C61B13.jpeg",
 		"quantity": "16",
 		"expireDate": "1-3 yıl",
 		"sideEffect": ["Baş ağrısı", "Karın ağrısı"],
@@ -31,7 +31,7 @@
 	},
 
 	"Ibuprofen": {
-		"picture": "https://www.medicinedirect.co.uk/chronic-conditions/arthritis/ibuprofen",
+		"picture": "https://www.medicinedirect.co.uk/media/catalog/product/cache/8bf3693ed458c257f5171ffffa4e8921/2/2/220-4956.jpg",
 		"quantity": "48",
 		"expireDate": "1-5 yıl",
 		"sideEffect": ["Baş ağrısı", "Mide bulantısı"],
@@ -50,7 +50,7 @@
 	},
 
 	"Setizin": {
-		"picture": "https://alturathmedical.com/product/cetizin-cetirizine-hydrochloride/#product-gallery",
+		"picture": "https://alturathmedical.com/wp-content/uploads/2020/01/081069.jpg",
 		"quantity": "20",
 		"expireDate": "30 gün",
 		"sideEffect": ["Uykusuzluk", "Ağız kuruluğu"],
@@ -62,7 +62,7 @@
 	},
 
 	"Furosemid": {
-		"picture": "https://www.asiapharma-syria.com/en/product-details/168/Furosemid",
+		"picture": "https://www.asiapharma-syria.com/files/images/products/furosemid.jpg",
 		"quantity": "20",
 		"expireDate": "2 yıl",
 		"sideEffect": ["Baş ağrısı", "karın ağrısı"],
@@ -70,7 +70,7 @@
 	},
 
 	"Asprin": {
-		"picture": "https://www.dreamstime.com/stock-photos-aspirin-image18931443",
+		"picture": "https://cdn.mafrservices.com/sys-master-root/h53/h6e/50232046583838/854605_main.jpg?im=Resize=1700",
 		"quantity": "20",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Mide kanaması, alerjik reaksiyon."],
@@ -78,7 +78,7 @@
 	},
 
 	"Wafarin": {
-		"picture": "https://mcareexports.com/our-products/warfarin-2mg-tablet/",
+		"picture": "https://mcareexports.com/wp-content/uploads/2021/04/Warfarin-2mg-tab.jpg",
 		"quantity": "28",
 		"expireDate": "1-2 yıl",
 		"sideEffect": ["Kanama riski, morluklar"],
@@ -86,7 +86,7 @@
 	},
 
 	"Alendronat": {
-		"picture": "https://www.myhealthshop.ch/fr/Alendronat-Zentiva-comprimes-hebdomadaires-70-mg-12-pce/7787485",
+		"picture": "https://www.myhealthshop.ch/thumbnail/88/b7/ea/1651328022/7787485_PICFRONT3D_F_1920x1920.jpg",
 		"quantity": "12",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Mide rahatsızlığı", "Çene kemik sorunları"],
@@ -94,7 +94,7 @@
 	},
 
 	"Amlodipin": {
-		"picture": "https://tkilac.com/urun/amlipin-5-10-mg-film-tablet/",
+		"picture": "https://tkilac.com/wp-content/uploads/600x600_amlipin_5_10.png",
 		"quantity": "30",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Baş dönmesi"],
@@ -102,7 +102,7 @@
 	},
 
 	"Lisinopiril": {
-		"picture": "https://www.indiamart.com/proddetail/lisinopril-20-mg-tablet-11553077773.html",
+		"picture": "https://5.imimg.com/data5/SELLER/Default/2023/1/RM/FH/UG/23618296/lisinopril-20-mg-tablet-1000x1000.jpg",
 		"quantity": "64",
 		"expireDate": "1-2 yıl",
 		"sideEffect": ["Kuru öksürük, Baş dönmesi"],
@@ -110,7 +110,7 @@
 	},
 
 	"Levotiroksin": {
-		"picture": "https://www.hekimce.com/blog/ilac-rehberi/levotiron",
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1669486220.jpg",
 		"quantity": "20",
 		"expireDate": "2 yıl",
 		"sideEffect": ["Çarpıntı"],
@@ -126,7 +126,7 @@
 	},
 
 	"İnsulin": {
-		"picture": "https://tr.wikipedia.org/wiki/%C4%B0ns%C3%BClin_%28ila%C3%A7%29#/media/Dosya:Inzul%C3%ADn.jpg",
+		"picture": "https://5.imimg.com/data5/SELLER/Default/2022/11/FC/RE/TU/50963842/biphasic-insulin-aspart-i-p-500x500.jpg",
 		"quantity": "1",
 		"expireDate": "6 ay",
 		"sideEffect": ["Hipoglisemi"],
@@ -134,7 +134,7 @@
 	},
 
 	"Duxet": {
-		"picture": "https://www.nobel.com.tr/urunler/ilaclar/duxet-30mg-28-kapsul",
+		"picture": "https://www.nobel.com.tr/cmsfiles/turkey/products/duxet-30mg-28-kapsul.png?v=21",
 		"quantity": "28",
 		"expireDate": "2 yıl",
 		"sideEffect": ["Baş dönmesi", "Ağız kuruluğu"],
@@ -142,7 +142,7 @@
 	},
 
 	"Perlinganit": {
-		"picture": "https://www.hekimce.com/blog/ilac-rehberi/perlinganit",
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1668368130.jpg",
 		"quantity": "10",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Baş dönmesi"],
@@ -150,7 +150,7 @@
 	},
 
 	"Donepezil": {
-		"picture": "https://www.indiamart.com/proddetail/donepezil-10mg-tablet-11408737730.html",
+		"picture": "https://5.imimg.com/data5/SELLER/Default/2022/12/VT/NH/PX/23618296/donepezil-10mg-tablet-1000x1000.jpg",
 		"quantity": "20",
 		"expireDate": "1 yıl",
 		"sideEffect": ["İshal", "İştahsızlık"],
@@ -158,7 +158,7 @@
 	},
 
 	"Selectra": {
-		"picture": "https://www.antalyaterapimerkezi.com/selectra-nedir/",
+		"picture": "https://www.antalyaterapimerkezi.com/wp-content/uploads/2024/09/Selectra-Nedir-750x375.webp",
 		"quantity": "28",
 		"expireDate": "1-yıl",
 		"sideEffect": ["Uykusuzluk"],
@@ -174,7 +174,7 @@
 	},
 
 	"Pantopranzol": {
-		"picture": "https://meinarztbedarf.com/cdn/shop/files/6486311_974c6ca5-2417-4060-86ce-23267a3cb169_700x700.jpg?v=1720029962",
+		"picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8ErFaiXfXGbas9UZrp1X_2jLjXFeUWRK9dQ&s",
 		"quantity": "14",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Mide bulantısı"],
@@ -182,7 +182,7 @@
 	},
 
 	"Levotiron": {
-		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1669486220.jpg ",
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1669486220.jpg",
 		"quantity": "50",
 		"expireDate": "1-2 yıl",
 		"sideEffect": ["Çarpıntı", "Kilo kaybı"],
@@ -190,7 +190,7 @@
 	},
 
 	"Clopidogrel": {
-		"picture": " https://advantagepharma.africa/wp-content/uploads/2023/10/clopidogrel.png",
+		"picture": "https://advantagepharma.africa/wp-content/uploads/2023/10/clopidogrel.png",
 		"quantity": "28",
 		"expireDate": "1-2yıl",
 		"sideEffect": ["Mide bulantısı"],
@@ -198,7 +198,7 @@
 	},
 
 	"Allopurinol": {
-		"picture": "https://4yfweck668yj.b-cdn.net/w_1200/wpjuiuz0at-0029462-allopurinol-300mg-30tb.jpg ",
+		"picture": "https://4yfweck668yj.b-cdn.net/w_1200/wpjuiuz0at-0029462-allopurinol-300mg-30tb.jpg",
 		"quantity": "30",
 		"expireDate": "3 yıl",
 		"sideEffect": ["Deri döküntüsü"],
@@ -214,7 +214,7 @@
 	},
 
 	"Tamsulosin": {
-		"picture": " https://image.made-in-china.com/2f0j00bvCiPjVMrhfB/GMP-Certified-Tamsulosin-Hydrochloride-Capsules-0-4mg.webp",
+		"picture": "https://image.made-in-china.com/2f0j00bvCiPjVMrhfB/GMP-Certified-Tamsulosin-Hydrochloride-Capsules-0-4mg.webp",
 		"quantity": "30",
 		"expireDate": "2 yıl",
 		"sideEffect": ["Mide bulantısı", "Baş dönmesi"],
@@ -246,7 +246,7 @@
 	},
 
 	"Omeprozol": {
-		"picture": " https://meinarztbedarf.com/cdn/shop/files/6113366_0da99463-c1bc-4af3-a450-3249e4caec1e_700x700.jpg?v=1720029949",
+		"picture": "https://meinarztbedarf.com/cdn/shop/files/6113366_700x700.jpg?v=1734182516",
 		"quantity": "14",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Mide ağrısı", "Baş ağrısı"],
@@ -254,7 +254,7 @@
 	},
 
 	"Paxil": {
-		"picture": " https://cdn.hekimce.com/uploads/2022/basliksiz-1-1668368826.jpg",
+		"picture": "https://cdn.hekimce.com/uploads/2022/basliksiz-1-1668368826.jpg",
 		"quantity": "28",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Ağız kuruluğu"],
@@ -286,7 +286,7 @@
 	},
 
 	"HCTZ": {
-		"picture": "https://www.assetpharmacy.com/wp-content/uploads/2022/06/Hydrochlorothiazide-25mg-Tablets-1-600x600.jpg ",
+		"picture": "https://www.assetpharmacy.com/wp-content/uploads/2022/06/Hydrochlorothiazide-25mg-Tablets-1-600x600.jpg",
 		"quantity": "200",
 		"expireDate": "1 yıl",
 		"sideEffect": ["Baş dönmesi"],
@@ -302,7 +302,7 @@
 	},
 
 	"Atorvastatin": {
-		"picture": "https://www.meldinpharma.com/shop/ucom-wdt-01-atorvastatin-tab-10mg-28-s-wockhardt-5171#attribute_values= ",
+		"picture": "https://www.meldinpharma.com/web/image/product.product/5079/image_1024/%5BUCOM_WDT-01%5D%20ATORVASTATIN%20TAB%2010MG%2028'S%20(WOCKHARDT)?unique=22dbee9",
 		"quantity": "28",
 		"expireDate": "1-2 yıl",
 		"sideEffect": [" Kas ağrısı"],
@@ -310,7 +310,7 @@
 	},
 
 	"Losartan": {
-		"picture": " https://globelapharma.com/product/losartan/",
+		"picture": "https://globelapharma.com/wp-content/uploads/2023/01/LOSARTAN.png",
 		"quantity": "30",
 		"expireDate": "2 yıl",
 		"sideEffect": [" Baş ağrısı"],
@@ -326,7 +326,7 @@
 	},
 
 	"Gabapentin": {
-		"picture": " https://medecify.com/product/gabapentin-300mg-capsules-x100/",
+		"picture": "https://medecify.com/storages/2024/05/DFDD-B-F-A-BE-F-F-D-B-scaled.jpeg",
 		"quantity": "100",
 		"expireDate": "1-2 yıl",
 		"sideEffect": ["Uykusuzluk"],

@@ -1,4 +1,11 @@
+import ScreenContainer from '../components/UI/ScreenContainer';
+import MedList from '../components/MedList';
+
 function Home() {
-	return;
+	return (
+		<ScreenContainer>
+			<MedList />
+		</ScreenContainer>
+	);
 }
 export default Home;
