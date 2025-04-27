@@ -14,6 +14,9 @@ import {
 	PaperProvider,
 } from 'react-native-paper';
 import Account from './screens/Account';
+import { Provider } from 'react-redux';
+import store, { persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -75,49 +78,53 @@ export default function App() {
 		},
 	};
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<StatusBar style='auto' />
-			<PaperProvider theme={theme}>
-				<NavigationContainer>
-					<BottomTabs.Navigator
-						screenOptions={({ navigation }) => ({
-							// headerStyle: {
-							// 	backgroundColor: colors.primary300,
-							// 	height: 90,
-							// },
-							// headerTintColor: 'white',
-							// headerRight: () => <Button>test</Button>,
-							headerShown: false,
-							tabBarStyle: {
-								backgroundColor: colors.primary300,
-								height: 70,
-							},
-							tabBarActiveTintColor: 'white',
-							tabBarInactiveTintColor: colors.primary200,
-							tabBarLabelStyle: { fontWeight: 'bold', fontSize: 16 },
-						})}
-					>
-						<BottomTabs.Screen
-							options={{
-								tabBarIcon: ({ color, size }) => (
-									<Ionicons name='home' size={size} color={color} />
-								),
-							}}
-							component={StackNavigator}
-							name='İlaçlarım'
-						/>
-						<BottomTabs.Screen
-							options={{
-								tabBarIcon: ({ color, size }) => (
-									<Ionicons name='add' size={size} color={color} />
-								),
-							}}
-							component={AddMedication}
-							name='İlaç Ekle'
-						/>
-					</BottomTabs.Navigator>
-				</NavigationContainer>
-			</PaperProvider>
-		</SafeAreaView>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				<SafeAreaView style={{ flex: 1 }}>
+					<StatusBar style='auto' />
+					<PaperProvider theme={theme}>
+						<NavigationContainer>
+							<BottomTabs.Navigator
+								screenOptions={({ navigation }) => ({
+									// headerStyle: {
+									// 	backgroundColor: colors.primary300,
+									// 	height: 90,
+									// },
+									// headerTintColor: 'white',
+									// headerRight: () => <Button>test</Button>,
+									headerShown: false,
+									tabBarStyle: {
+										backgroundColor: colors.primary300,
+										height: 70,
+									},
+									tabBarActiveTintColor: 'white',
+									tabBarInactiveTintColor: colors.primary200,
+									tabBarLabelStyle: { fontWeight: 'bold', fontSize: 16 },
+								})}
+							>
+								<BottomTabs.Screen
+									options={{
+										tabBarIcon: ({ color, size }) => (
+											<Ionicons name='home' size={size} color={color} />
+										),
+									}}
+									component={StackNavigator}
+									name='İlaçlarım'
+								/>
+								<BottomTabs.Screen
+									options={{
+										tabBarIcon: ({ color, size }) => (
+											<Ionicons name='add' size={size} color={color} />
+										),
+									}}
+									component={AddMedication}
+									name='İlaç Ekle'
+								/>
+							</BottomTabs.Navigator>
+						</NavigationContainer>
+					</PaperProvider>
+				</SafeAreaView>
+			</PersistGate>
+		</Provider>
 	);
 }

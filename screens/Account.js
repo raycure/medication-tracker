@@ -1,30 +1,71 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ScreenContainer from '../components/UI/ScreenContainer';
 import { Button, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors, primaryTitle } from '../components/constants/constantStyles';
+import { fetchData } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 function Account() {
-	const userInfo = {
-		name: 'Merve Türk',
-		yob: '2002', //yearOfBirth
-		height: '170',
-		weight: '65',
-	};
-	const [newUserInfo, setNewUserInfo] = useState({
-		name: userInfo.name,
-		yob: userInfo.yob,
-		height: userInfo.height,
-		weight: userInfo.weight,
+	const dispatch = useDispatch();
+	useEffect(() => {
+		initUserInfo();
+	}, []);
+
+	async function initUserInfo() {
+		try {
+			const response = await dispatch(
+				fetchData({
+					url: '/userInfo',
+					method: 'GET',
+				})
+			);
+			// todo if response's status is 403 redirect to login
+			if (response.payload.status === 200) {
+				const userInfo = response.payload.data.foundUser;
+				setUserInfo({
+					name: userInfo.name,
+					yob: userInfo.yob,
+					height: userInfo.height,
+					weight: userInfo.weight,
+				});
+			}
+		} catch (error) {
+			console.log('error', error);
+		}
+	}
+
+	const [userInfo, setUserInfo] = useState({
+		name: '',
+		yob: '',
+		height: '',
+		weight: '',
 	});
 	const onInputChange = (text, fieldName) => {
-		setNewUserInfo((prev) => ({
+		setUserInfo((prev) => ({
 			...prev,
 			[fieldName]: text,
 		}));
 	};
-	const onCancel = () => {};
-	const onSave = () => {};
+	const onCancel = () => {
+		initUserInfo();
+	};
+	const onSave = () => {
+		const updateData = {
+			name: userInfo.name,
+			yob: userInfo.yob,
+			height: userInfo.height,
+			weight: userInfo.weight,
+		};
+		const response = dispatch(
+			fetchData({
+				url: '/userInfo/update',
+				method: 'PUT',
+				data: { updateData },
+			})
+		);
+		console.log('response in save', response);
+	};
 	return (
 		<ScreenContainer>
 			<View style={styles.userFormCon}>
@@ -32,14 +73,14 @@ function Account() {
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
 					label={userInfo.name}
-					value={newUserInfo.name}
+					value={userInfo.name}
 					onChangeText={(text) => onInputChange(text, 'name')}
 					mode='outlined'
 				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
 					label={userInfo.yob}
-					value={newUserInfo.yob}
+					value={userInfo.yob}
 					onChangeText={(text) => onInputChange(text, 'yob')}
 					mode='outlined'
 				/>
@@ -52,14 +93,14 @@ function Account() {
 					<TextInput
 						style={{ marginBlock: 6, width: '48%', marginInline: 'auto' }}
 						label={`${userInfo.height} cm`}
-						value={newUserInfo.height}
+						value={userInfo.height}
 						onChangeText={(text) => onInputChange(text, 'height')}
 						mode='outlined'
 					/>
 					<TextInput
 						style={{ marginBlock: 6, width: '48%', marginInline: 'auto' }}
 						label={`${userInfo.weight} kg`}
-						value={newUserInfo.weight}
+						value={userInfo.weight}
 						onChangeText={(text) => onInputChange(text, 'weight')}
 						mode='outlined'
 					/>

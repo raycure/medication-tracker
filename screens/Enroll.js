@@ -3,13 +3,25 @@ import ScreenContainer from '../components/UI/ScreenContainer';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { miniTitle } from '../components/constants/constantStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	fetchData,
+	saveAccessToken,
+	selectAccessToken,
+} from '../redux/authSlice';
+import axios from '../axios';
 
 function Enroll() {
+	const dispatch = useDispatch();
+	let isLoggedIn = useSelector(selectAccessToken);
+	console.log('isLoggedIn', isLoggedIn);
 	const [userInfo, setUserInfo] = useState({
 		name: '',
+		mail: '',
 		yob: '',
 		height: '',
 		weight: '',
+		password: '',
 	});
 
 	const data = {
@@ -17,6 +29,11 @@ function Enroll() {
 			title: 'Size ne şekilde hitap etmeliyiz?',
 			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
 			label: 'Adınız',
+		},
+		password: {
+			title: 'Şifrenizi oluşturun',
+			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
+			label: 'Şifre',
 		},
 		yob: {
 			title: 'Doğum yılınız nedir?',
@@ -33,18 +50,35 @@ function Enroll() {
 			picture: 'https://cdn-icons-png.flaticon.com/512/8035/8035049.png',
 			label: 'Kilo (kg)',
 		},
+		mail: {
+			title: 'E-posta adresiniz nedir?',
+			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
+			label: 'E-posta',
+		},
 	};
 
 	const [activeElement, setActiveElement] = useState('name');
 
-	const loadNextItem = () => {
+	const loadNextItem = async () => {
 		const elements = Object.keys(data);
 		const currentIndex = elements.indexOf(activeElement);
 		if (currentIndex < elements.length - 1) {
 			setActiveElement(elements[currentIndex + 1]);
 		} else {
-			// All questions completed - handle submission
-			console.log('Form completed:', userInfo);
+			const response = await dispatch(
+				fetchData({
+					data: userInfo,
+					url: '/register',
+					method: 'POST',
+				})
+			);
+			if (response.payload.status === 200) {
+				const accessToken = response.payload.data.accessToken;
+				if (accessToken) {
+					console.log('accessToken after register', accessToken);
+					dispatch(saveAccessToken(accessToken));
+				}
+			}
 		}
 	};
 
@@ -54,6 +88,14 @@ function Enroll() {
 			[fieldName]: text,
 		}));
 	};
+	async function deleteUsers() {
+		try {
+			const response = await axios.delete('/deleteAllUsers'); // Axios delete method
+			console.log('response', response.data);
+		} catch (error) {
+			console.error('Error deleting users:', error);
+		}
+	}
 
 	return (
 		<ScreenContainer>
@@ -88,6 +130,7 @@ function Enroll() {
 			>
 				{activeElement === 'weight' ? 'Tamamla' : 'Sonraki'}
 			</Button>
+			<Button onPress={deleteUsers}>delete users</Button>
 		</ScreenContainer>
 	);
 }
