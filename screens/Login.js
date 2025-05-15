@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { colors } from '../components/constants/constantStyles';
 import { useState } from 'react';
@@ -19,6 +19,13 @@ function Login() {
 	return (
 		<ScreenContainer>
 			<View style={styles.userFormCon}>
+				<Image
+					source={{
+						uri: 'https://cdn-icons-png.flaticon.com/512/4661/4661334.png',
+					}}
+					resizeMode='cover'
+					style={styles.image}
+				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
 					label='Email'
@@ -64,4 +71,5 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.4,
 	},
+	image: { height: 170, width: 150, marginInline: 'auto' },
 });
