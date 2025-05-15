@@ -3,25 +3,18 @@ import ScreenContainer from '../components/UI/ScreenContainer';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { miniTitle } from '../components/constants/constantStyles';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-	fetchData,
-	saveAccessToken,
-	selectAccessToken,
-} from '../redux/authSlice';
-import axios from '../axios';
+import { useDispatch } from 'react-redux';
+import { fetchData, saveAccessToken } from '../redux/authSlice';
 
 function Enroll() {
 	const dispatch = useDispatch();
-	let isLoggedIn = useSelector(selectAccessToken);
-	console.log('isLoggedIn', isLoggedIn);
 	const [userInfo, setUserInfo] = useState({
 		name: '',
 		mail: '',
+		password: '',
 		yob: '',
 		height: '',
 		weight: '',
-		password: '',
 	});
 
 	const data = {
@@ -30,9 +23,14 @@ function Enroll() {
 			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
 			label: 'Adınız',
 		},
+		mail: {
+			title: 'E-posta adresiniz nedir?',
+			picture: 'https://cdn-icons-png.flaticon.com/512/6778/6778700.png',
+			label: 'E-posta',
+		},
 		password: {
 			title: 'Şifrenizi oluşturun',
-			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
+			picture: 'https://cdn-icons-png.flaticon.com/512/388/388458.png',
 			label: 'Şifre',
 		},
 		yob: {
@@ -49,11 +47,6 @@ function Enroll() {
 			title: 'Kaç kilosunuz?',
 			picture: 'https://cdn-icons-png.flaticon.com/512/8035/8035049.png',
 			label: 'Kilo (kg)',
-		},
-		mail: {
-			title: 'E-posta adresiniz nedir?',
-			picture: 'https://cdn-icons-png.flaticon.com/512/2544/2544119.png',
-			label: 'E-posta',
 		},
 	};
 
@@ -88,14 +81,6 @@ function Enroll() {
 			[fieldName]: text,
 		}));
 	};
-	async function deleteUsers() {
-		try {
-			const response = await axios.delete('/deleteAllUsers'); // Axios delete method
-			console.log('response', response.data);
-		} catch (error) {
-			console.error('Error deleting users:', error);
-		}
-	}
 
 	return (
 		<ScreenContainer>
@@ -112,7 +97,14 @@ function Enroll() {
 					value={userInfo[activeElement]}
 					onChangeText={(text) => onInputChange(text, activeElement)}
 					mode='outlined'
-					keyboardType={activeElement === 'name' ? 'default' : 'numeric'}
+					secureTextEntry={activeElement === 'password' ? true : false}
+					keyboardType={
+						activeElement === 'name' ||
+						activeElement === 'password' ||
+						activeElement === 'mail'
+							? 'default'
+							: 'numeric'
+					}
 				/>
 			</View>
 			<Button
@@ -130,7 +122,6 @@ function Enroll() {
 			>
 				{activeElement === 'weight' ? 'Tamamla' : 'Sonraki'}
 			</Button>
-			<Button onPress={deleteUsers}>delete users</Button>
 		</ScreenContainer>
 	);
 }

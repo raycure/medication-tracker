@@ -1,11 +1,11 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import ScreenContainer from '../components/UI/ScreenContainer';
-import { Button, TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, TextInput, Modal, Portal } from 'react-native-paper';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, primaryTitle } from '../components/constants/constantStyles';
 import { fetchData } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
-
 function Account() {
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -26,6 +26,7 @@ function Account() {
 				setUserInfo({
 					name: userInfo.name,
 					yob: userInfo.yob,
+					mail: userInfo.mail,
 					height: userInfo.height,
 					weight: userInfo.weight,
 				});
@@ -38,6 +39,8 @@ function Account() {
 	const [userInfo, setUserInfo] = useState({
 		name: '',
 		yob: '',
+		mail: '',
+		password: '',
 		height: '',
 		weight: '',
 	});
@@ -54,6 +57,7 @@ function Account() {
 		const updateData = {
 			name: userInfo.name,
 			yob: userInfo.yob,
+			mail: userInfo.mail,
 			height: userInfo.height,
 			weight: userInfo.weight,
 		};
@@ -66,6 +70,19 @@ function Account() {
 		);
 		console.log('response in save', response);
 	};
+	const onSavePassword = () => {
+		// password ayrı kaydet once
+		// password gozukur kalmasın diye statini sonra bos bırak
+		setUserInfo((prev) => ({
+			...prev,
+			password: '',
+		}));
+	};
+	const [visible, setVisible] = React.useState(false);
+
+	const showModal = () => setVisible(true);
+	const hideModal = () => setVisible(false);
+
 	return (
 		<ScreenContainer>
 			<View style={styles.userFormCon}>
@@ -82,6 +99,13 @@ function Account() {
 					label={userInfo.yob}
 					value={userInfo.yob}
 					onChangeText={(text) => onInputChange(text, 'yob')}
+					mode='outlined'
+				/>
+				<TextInput
+					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
+					label={userInfo.mail}
+					value={userInfo.mail}
+					onChangeText={(text) => onInputChange(text, 'mail')}
 					mode='outlined'
 				/>
 				<View
@@ -105,6 +129,33 @@ function Account() {
 						mode='outlined'
 					/>
 				</View>
+				<Portal>
+					<Modal
+						visible={visible}
+						onDismiss={hideModal}
+						contentContainerStyle={styles.containerStyle}
+					>
+						<TextInput
+							style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
+							label='Yeni Şifre'
+							secureTextEntry={true}
+							value={userInfo.password}
+							onChangeText={(text) => onInputChange(text, 'password')}
+							mode='outlined'
+						/>
+						<Button
+							icon='lock'
+							style={{ width: '45%', marginInline: 'auto', marginBlock: 10 }}
+							mode='contained'
+							onPress={onSavePassword}
+						>
+							Kaydet
+						</Button>
+					</Modal>
+				</Portal>
+				<Pressable onPress={showModal}>
+					<Text style={{ color: colors.gray700 }}>Şifremi Unuttum</Text>
+				</Pressable>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -150,5 +201,12 @@ const styles = StyleSheet.create({
 		shadowRadius: 3,
 		shadowOffset: { width: 1, height: 1 },
 		shadowOpacity: 0.4,
+	},
+	containerStyle: {
+		backgroundColor: 'white',
+		paddingBlock: 60,
+		paddingInline: 20,
+		marginInline: 20,
+		borderRadius: 14,
 	},
 });

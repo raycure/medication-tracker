@@ -1,9 +1,11 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, SafeAreaView, Text } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Enroll from './screens/Enroll';
+import Login from './screens/Login';
 import Home from './screens/Home';
 import ManageMedication from './screens/ManageMed';
 import AddMedication from './screens/AddMeds';
@@ -11,60 +13,170 @@ import { colors } from './components/constants/constantStyles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {
 	MD3LightTheme as DefaultTheme,
+	Divider,
+	Modal,
 	PaperProvider,
+	Portal,
 } from 'react-native-paper';
 import Account from './screens/Account';
 import { Provider } from 'react-redux';
 import store, { persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Button } from 'react-native-paper';
+import axios from './axios';
+import { useSelector } from 'react-redux';
+import { selectAccessToken } from './redux/authSlice';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function StackNavigator() {
+	async function logout() {
+		axios.post('/logout');
+	}
+	async function deleteUsers() {
+		try {
+			const response = await axios.delete('/deleteAllUsers'); // Axios delete method
+			console.log('response', response.data);
+		} catch (error) {
+			console.error('Error deleting users:', error);
+		}
+	}
+	let isLoggedIn = useSelector(selectAccessToken);
+	console.log('isLoggedIn', isLoggedIn);
+	const [visible, setVisible] = React.useState(false);
+	const openOverlay = () => setVisible(true);
+	const closeOverlay = () => setVisible(false);
+	const navigation = useNavigation();
 	return (
-		<Stack.Navigator>
-			<Stack.Screen
-				options={({ navigation }) => ({
-					//headerShown: false,
-					title: 'Medify',
-					headerStyle: {
-						backgroundColor: colors.primary200,
-					},
-					headerTintColor: colors.gray800,
-					headerRight: () => (
-						<>
-							<Pressable
-								onPress={() => {
-									navigation.navigate('Kayıt Ol');
-								}}
-							>
-								<Text>enrol test</Text>
-							</Pressable>
-							<Pressable
-								onPress={() => {
-									navigation.navigate('Hesabım');
-								}}
-							>
-								<Ionicons
-									name='person-circle'
-									size={34}
-									color={colors.gray800}
-								/>
-							</Pressable>
-						</>
-					),
-				})}
-				component={Home}
-				name='Ana Ekran'
-			/>
-			<Stack.Screen
-				options={{ headerShown: false }}
-				component={Enroll}
-				name='Kayıt Ol'
-			/>
-			<Stack.Screen component={Account} name='Hesabım' />
-			<Stack.Screen component={ManageMedication} name='İlacı Düzenle' />
-		</Stack.Navigator>
+		<>
+			<Stack.Navigator>
+				<Stack.Screen
+					options={({ navigation }) => ({
+						//headerShown: false,
+						title: 'Medify',
+						headerStyle: {
+							backgroundColor: colors.primary200,
+						},
+						headerTintColor: colors.gray800,
+						headerRight: () => (
+							<>
+								<Pressable onPress={openOverlay}>
+									<Ionicons
+										name='person-circle'
+										size={34}
+										color={colors.gray800}
+									/>
+								</Pressable>
+							</>
+						),
+					})}
+					component={Home}
+					name='Ana Ekran'
+				/>
+				<Stack.Screen
+					options={{ headerShown: false }}
+					component={Enroll}
+					name='Kayıt Ol'
+				/>
+				<Stack.Screen component={Account} name='Hesabım' />
+				<Stack.Screen component={Login} name='Giriş Yap' />
+				<Stack.Screen component={ManageMedication} name='İlacı Düzenle' />
+			</Stack.Navigator>
+			<Portal>
+				<Modal
+					visible={visible}
+					onDismiss={closeOverlay}
+					contentContainerStyle={styles.overlay}
+				>
+					<View style={{ flex: 1 }}>
+						<Text
+							style={{
+								fontSize: 24,
+								fontWeight: 'bold',
+								marginBottom: '24',
+								color: colors.gray800,
+							}}
+						>
+							Hesap Aktiviteleri
+						</Text>
+						{isLoggedIn === true ? (
+							<>
+								<Button
+									labelStyle={styles.menuItemLabel}
+									style={styles.menuItem}
+									onPress={() => {
+										navigation.navigate('İlaçlarım', {
+											screen: 'Hesabım',
+										});
+										closeOverlay();
+									}}
+								>
+									Hesabım
+								</Button>
+								<Divider />
+								<Button
+									labelStyle={styles.menuItemLabel}
+									style={styles.menuItem}
+									onPress={() => {
+										logout;
+										closeOverlay();
+									}}
+								>
+									Hesabımdan Çık
+								</Button>
+								<Divider />
+								<Button
+									labelStyle={styles.menuItemLabel}
+									style={styles.menuItem}
+									onPress={() => {
+										deleteUsers;
+										closeOverlay();
+									}}
+								>
+									Hesabımı Sil
+								</Button>
+							</>
+						) : (
+							<>
+								<Button
+									labelStyle={styles.menuItemLabel}
+									style={styles.menuItem}
+									onPress={() => {
+										navigation.navigate('İlaçlarım', {
+											screen: 'Kayıt Ol',
+										});
+										closeOverlay();
+									}}
+								>
+									Hesap Oluştur
+								</Button>
+								<Divider />
+								<Button
+									labelStyle={styles.menuItemLabel}
+									style={styles.menuItem}
+									onPress={() => {
+										navigation.navigate('İlaçlarım', {
+											screen: 'Giriş Yap',
+										});
+										closeOverlay();
+									}}
+								>
+									Hesabıma Giriş Yap
+								</Button>
+							</>
+						)}
+						<Divider />
+						<Button
+							labelStyle={styles.menuItemLabel}
+							style={styles.menuItem}
+							onPress={closeOverlay}
+						>
+							Menü Kapat
+						</Button>
+					</View>
+				</Modal>
+			</Portal>
+		</>
 	);
 }
 
@@ -85,13 +197,7 @@ export default function App() {
 					<PaperProvider theme={theme}>
 						<NavigationContainer>
 							<BottomTabs.Navigator
-								screenOptions={({ navigation }) => ({
-									// headerStyle: {
-									// 	backgroundColor: colors.primary300,
-									// 	height: 90,
-									// },
-									// headerTintColor: 'white',
-									// headerRight: () => <Button>test</Button>,
+								screenOptions={() => ({
 									headerShown: false,
 									tabBarStyle: {
 										backgroundColor: colors.primary300,
@@ -128,3 +234,21 @@ export default function App() {
 		</Provider>
 	);
 }
+const styles = StyleSheet.create({
+	overlay: {
+		backgroundColor: colors.gray100,
+		position: 'absolute',
+		top: 56,
+		right: 0,
+		width: '70%',
+		height: 'auto',
+		padding: 30,
+		elevation: 10,
+		borderLeftWidth: 1,
+		borderLeftColor: colors.gray200,
+	},
+	menuItem: {
+		borderRadius: 0,
+	},
+	menuItemLabel: { fontSize: 18, padding: 16 },
+});
