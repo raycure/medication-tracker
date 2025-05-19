@@ -5,6 +5,7 @@ import { logout } from '../../redux/authSlice.js';
 const { hash, compare } = pkg;
 export const userInfoPutController = async (req, res) => {
 	try {
+		console.log('req.body and userinfo ', req.body);
 		if (!req.isAuthenticated) {
 			return res.status(401).json({ message: 'no auth' });
 		}
@@ -76,6 +77,7 @@ export const userInfoPutController = async (req, res) => {
 			);
 			return res.status(200).json({
 				message: 'basariyla guncellendi',
+				accessToken: req.accessToken,
 			});
 		}
 		return res.status(200).json({

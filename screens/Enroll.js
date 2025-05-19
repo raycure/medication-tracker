@@ -5,6 +5,7 @@ import { Button, TextInput } from 'react-native-paper';
 import { miniTitle } from '../components/constants/constantStyles';
 import { useDispatch } from 'react-redux';
 import { fetchData, saveAccessToken } from '../redux/authSlice';
+import { useNavigation } from '@react-navigation/native';
 
 function Enroll() {
 	const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Enroll() {
 		height: '',
 		weight: '',
 	});
+	const navigation = useNavigation();
 
 	const data = {
 		name: {
@@ -65,11 +67,16 @@ function Enroll() {
 					method: 'POST',
 				})
 			);
+
 			if (response.payload.status === 200) {
 				const accessToken = response.payload.data.accessToken;
 				if (accessToken) {
-					console.log('accessToken after register', accessToken);
 					dispatch(saveAccessToken(accessToken));
+					navigation.navigate('Ana Ekran');
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Ana Ekran' }],
+					});
 				}
 			}
 		}
@@ -97,6 +104,9 @@ function Enroll() {
 					value={userInfo[activeElement]}
 					onChangeText={(text) => onInputChange(text, activeElement)}
 					mode='outlined'
+					autoCapitalize='none'
+					autoComplete='off'
+					autoCorrect={false}
 					secureTextEntry={activeElement === 'password' ? true : false}
 					keyboardType={
 						activeElement === 'name' ||

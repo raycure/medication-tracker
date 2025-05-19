@@ -13,6 +13,8 @@ const initialState = {
 };
 
 async function setupAxiosDefaults(accessToken) {
+	console.log('setupAxiosDefaults is called', accessToken);
+
 	if (accessToken) {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 	} else {
@@ -34,7 +36,7 @@ export const fetchData = createAsyncThunk(
 			const response = await axios({
 				url,
 				data: method !== 'GET' ? data : undefined,
-				method: method,
+				method,
 			});
 			const isAccessTokenRefresh =
 				response.headers && response.headers['x-refreshed-token'];
@@ -42,6 +44,10 @@ export const fetchData = createAsyncThunk(
 
 			if (isAccessTokenRefresh) {
 				let newAccessToken = response?.data?.accessToken;
+				console.log("'newAccessTokens origin: ", response?.data);
+
+				console.log('newAccessToken', newAccessToken);
+
 				dispatch(saveAccessToken(newAccessToken));
 				setupAxiosDefaults(newAccessToken);
 			}
@@ -77,6 +83,7 @@ const authSlice = createSlice({
 				state.status = 'succeeded';
 				state.isLoading = false;
 				state.isSuccess = true;
+
 				if (
 					action.payload.endpoint.includes('/login') ||
 					action.payload.endpoint.includes('/register')
@@ -85,7 +92,7 @@ const authSlice = createSlice({
 				}
 				if (
 					action.payload.endpoint.includes('/logout') ||
-					action.payload.endpoint.includes('/userInfo/deleteAccount')
+					action.payload.endpoint.includes('/deleteAccount')
 				) {
 					state.isLoggedIn = false;
 					state.accessToken = null;

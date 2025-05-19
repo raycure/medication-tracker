@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -19,30 +19,51 @@ import {
 	Portal,
 } from 'react-native-paper';
 import Account from './screens/Account';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store, { persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Button } from 'react-native-paper';
 import axios from './axios';
 import { useSelector } from 'react-redux';
-import { selectAccessToken } from './redux/authSlice';
+import { fetchData, selectIsLoggedIn } from './redux/authSlice';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function StackNavigator() {
+	const dispatch = useDispatch();
 	async function logout() {
-		axios.post('/logout');
-	}
-	async function deleteUsers() {
 		try {
-			const response = await axios.delete('/deleteAllUsers'); // Axios delete method
-			console.log('response', response.data);
+			console.log('logout pressed');
+
+			const response = await dispatch(
+				fetchData({
+					url: '/logout',
+					method: 'POST',
+					data: {},
+				})
+			);
+			console.log('response', response);
 		} catch (error) {
-			console.error('Error deleting users:', error);
+			console.error('Error logging out:', error);
 		}
 	}
-	let isLoggedIn = useSelector(selectAccessToken);
-	console.log('isLoggedIn', isLoggedIn);
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	useEffect(() => {
+		console.log('isLoggedIn in App.js', isLoggedIn);
+	}, [isLoggedIn]);
+
+	async function deleteUser() {
+		try {
+			console.log('deleteUser pressed');
+			const response = await dispatch(
+				fetchData({ data: {}, method: 'DELETE', url: '/deleteAccount' })
+			);
+			console.log('response', response);
+		} catch (error) {
+			console.error('Error deleting user:', error);
+		}
+	}
+
 	const [visible, setVisible] = React.useState(false);
 	const openOverlay = () => setVisible(true);
 	const closeOverlay = () => setVisible(false);
@@ -118,7 +139,7 @@ function StackNavigator() {
 									labelStyle={styles.menuItemLabel}
 									style={styles.menuItem}
 									onPress={() => {
-										logout;
+										logout();
 										closeOverlay();
 									}}
 								>
@@ -129,7 +150,7 @@ function StackNavigator() {
 									labelStyle={styles.menuItemLabel}
 									style={styles.menuItem}
 									onPress={() => {
-										deleteUsers;
+										deleteUser();
 										closeOverlay();
 									}}
 								>

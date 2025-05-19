@@ -14,6 +14,8 @@ function Account() {
 
 	async function initUserInfo() {
 		try {
+			console.log("'initUserInfo called'");
+
 			const response = await dispatch(
 				fetchData({
 					url: '/userInfo',
@@ -53,7 +55,7 @@ function Account() {
 	const onCancel = () => {
 		initUserInfo();
 	};
-	const onSave = () => {
+	async function onSave() {
 		const updateData = {
 			name: userInfo.name,
 			yob: userInfo.yob,
@@ -61,15 +63,15 @@ function Account() {
 			height: userInfo.height,
 			weight: userInfo.weight,
 		};
-		const response = dispatch(
+		const response = await dispatch(
 			fetchData({
 				url: '/userInfo/update',
 				method: 'PUT',
 				data: { updateData },
 			})
 		);
-		console.log('response in save', response);
-	};
+		console.log('response for update', response);
+	}
 	const onSavePassword = () => {
 		// password ayrı kaydet once
 		// password gozukur kalmasın diye statini sonra bos bırak
@@ -89,21 +91,33 @@ function Account() {
 				<Text style={primaryTitle}>Bilgileriniz</Text>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
-					label={userInfo.name}
+					label='Adınız'
+					placeholder='Adınız'
+					placeholderTextColor={colors.gray500}
 					value={userInfo.name}
 					onChangeText={(text) => onInputChange(text, 'name')}
 					mode='outlined'
 				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
-					label={userInfo.yob}
+					label='Doğum Yılı'
+					placeholder='DD/MM/YYYY'
+					keyboardType='numeric'
+					maxLength={10}
 					value={userInfo.yob}
 					onChangeText={(text) => onInputChange(text, 'yob')}
 					mode='outlined'
 				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
-					label={userInfo.mail}
+					label='E-posta'
+					placeholder='E-posta'
+					placeholderTextColor={colors.gray500}
+					autoCapitalize='none'
+					autoComplete='none'
+					autoCorrect={false}
+					keyboardType='email-address'
+					textContentType='emailAddress'
 					value={userInfo.mail}
 					onChangeText={(text) => onInputChange(text, 'mail')}
 					mode='outlined'
@@ -116,14 +130,21 @@ function Account() {
 				>
 					<TextInput
 						style={{ marginBlock: 6, width: '48%', marginInline: 'auto' }}
-						label={`${userInfo.height} cm`}
+						label='Boyunuz (cm)'
+						placeholder='Boyunuz (cm)'
+						placeholderTextColor={colors.gray500}
+						keyboardType='numeric'
 						value={userInfo.height}
 						onChangeText={(text) => onInputChange(text, 'height')}
 						mode='outlined'
 					/>
 					<TextInput
 						style={{ marginBlock: 6, width: '48%', marginInline: 'auto' }}
-						label={`${userInfo.weight} kg`}
+						label='Kilonuz (kg)'
+						placeholder='Kilonuz (kg)'
+						placeholderTextColor={colors.gray500}
+						keyboardType='numeric'
+						maxLength={3}
 						value={userInfo.weight}
 						onChangeText={(text) => onInputChange(text, 'weight')}
 						mode='outlined'

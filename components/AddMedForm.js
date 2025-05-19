@@ -18,7 +18,18 @@ function AddMedForm() {
 		}));
 	};
 	const medData = medListData[inputData.medName];
-	const onAddMed = () => {};
+	async function onAddMed() {
+		if (inputData.amount === '' || inputData.time === '') {
+			alert('Lütfen ilaç miktarını ve saatini giriniz.');
+			return;
+		}
+		const med = {
+			name: inputData.medName,
+			amount: inputData.amount,
+			time: inputData.time,
+		};
+		console.log(med);
+	}
 	return (
 		<View style={styles.formOuterCon}>
 			<Searchbar
