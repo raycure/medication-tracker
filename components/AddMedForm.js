@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { colors, miniTitle } from './constants/constantStyles';
 import { useState } from 'react';
-import { Button, Searchbar, TextInput } from 'react-native-paper';
+import { Button, List, Searchbar, TextInput } from 'react-native-paper';
 import * as React from 'react';
 import medListData from '../store/medListData.json';
 function AddMedForm() {
@@ -27,6 +27,44 @@ function AddMedForm() {
 				onChangeText={(text) => onInputChange(text, 'searchQuery')}
 				value={inputData.searchQuery}
 			/>
+			{inputData.searchQuery.length >= 2 ? (
+				<View style={{ position: 'relative', zIndex: 100 }}>
+					<List.Section
+						style={{
+							position: 'absolute',
+							width: '100%',
+							top: -30,
+						}}
+					>
+						{inputData.searchQuery.length >= 2 &&
+							Object.keys(medListData)
+								.filter((key) =>
+									key
+										.toLowerCase()
+										.includes(inputData.searchQuery.toLowerCase())
+								)
+								.map((key, index) => (
+									<List.Item
+										style={{
+											backgroundColor: colors.gray100,
+											width: '100%',
+											paddingInline: 20,
+										}}
+										key={index}
+										title={key}
+										description={`Adet: ${medListData[key].quantity}  -  Son Kullanma: ${medListData[key].expireDate}`}
+										left={() => <List.Icon icon='pill' />}
+										onPress={() => {
+											onInputChange(key, 'medName');
+											onInputChange('', 'searchQuery');
+										}}
+									/>
+								))}
+					</List.Section>
+				</View>
+			) : (
+				''
+			)}
 			<View style={{ flexDirection: 'row' }}>
 				<View style={styles.imageCon}>
 					<Image
