@@ -3,6 +3,10 @@ import { Button, TextInput } from 'react-native-paper';
 import { colors } from '../components/constants/constantStyles';
 import { useState } from 'react';
 import ScreenContainer from '../components/UI/ScreenContainer';
+import axios from '../axios';
+import { useDispatch } from 'react-redux';
+import { fetchData, saveAccessToken } from '../redux/authSlice';
+import { useNavigation } from '@react-navigation/native';
 
 function Login() {
 	const [userInfo, setUserInfo] = useState({
@@ -15,7 +19,35 @@ function Login() {
 			[fieldName]: text,
 		}));
 	};
-	const onSave = () => {};
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+	async function onSave() {
+		try {
+			const response = await dispatch(
+				fetchData({
+					url: '/login',
+					data: {
+						mail: userInfo.mail,
+						password: userInfo.password,
+					},
+					method: 'POST',
+				})
+			);
+			const accessToken = response.payload.data.accessToken;
+
+			if (accessToken) {
+				dispatch(saveAccessToken(accessToken));
+			}
+			navigation.navigate('Ana Ekran');
+			navigation.reset({
+				index: 0,
+				routes: [{ name: 'Ana Ekran' }],
+			});
+			setUserInfo({ mail: '', password: '' });
+		} catch (error) {
+			console.error('Error logging in:', error);
+		}
+	}
 	return (
 		<ScreenContainer>
 			<View style={styles.userFormCon}>
@@ -32,10 +64,12 @@ function Login() {
 					value={userInfo.mail}
 					onChangeText={(text) => onInputChange(text, 'mail')}
 					mode='outlined'
+					autoCapitalize='none'
 				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '97%', marginInline: 'auto' }}
 					label='Şifre'
+					autoCapitalize='none'
 					value={userInfo.password}
 					onChangeText={(text) => onInputChange(text, 'password')}
 					mode='outlined'

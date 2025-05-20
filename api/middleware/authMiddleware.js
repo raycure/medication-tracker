@@ -13,6 +13,7 @@ const authMiddleware = async (req, res, next) => {
 			decodedToken = jwt.decode(refreshToken);
 			jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 		} catch (decodeError) {
+			console.log('decodeError in authMiddleware', decodeError);
 			await handleLogout(req, res, true);
 			return res.status(403).json({
 				message: 'Invalid refresh token',
@@ -21,10 +22,12 @@ const authMiddleware = async (req, res, next) => {
 		}
 
 		const userIdFromToken = decodedToken.userId;
+		console.log('decodedToken', decodedToken);
+
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userIdFromToken),
 		});
-		console.log('foundUser', foundUser);
+		console.log('foundUser in authMiddleware', foundUser);
 
 		if (!foundUser) {
 			await handleLogout(req, res, true);
@@ -47,11 +50,9 @@ const authMiddleware = async (req, res, next) => {
 			},
 		};
 
-		// 	// Call verifyJWT with req and mock response
 		const authHeader = req.headers['authorization'];
 		if (!authHeader) {
-			console.log('authHeader is missing');
-			return res.status(401).json({ message: 'Token is missing or invalid' });
+			throw new Error('Authorization header is missing');
 		}
 		const accessToken = authHeader.split(' ')[1];
 		req.accessToken = accessToken;

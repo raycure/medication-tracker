@@ -22,6 +22,7 @@ const register = async (req, res) => {
 
 		const newUser = await Users.create(req.body);
 		const userId = new ObjectId(newUser).toHexString();
+		console.log('userId in register', userId);
 
 		const accessToken = jwt.sign(
 			{
