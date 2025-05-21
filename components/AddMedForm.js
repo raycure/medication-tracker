@@ -1,9 +1,11 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, miniTitle } from './constants/constantStyles';
 import { useState } from 'react';
 import { Button, List, Searchbar, TextInput } from 'react-native-paper';
-import * as React from 'react';
 import medListData from '../store/medListData.json';
+import { fetchData } from '../redux/authSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 function AddMedForm() {
 	const [inputData, setInputData] = useState({
 		amount: '',
@@ -12,23 +14,69 @@ function AddMedForm() {
 		time: '',
 	});
 	const onInputChange = (text, fieldName) => {
-		setInputData((prev) => ({
-			...prev,
-			[fieldName]: text,
-		}));
-	};
-	const medData = medListData[inputData.medName];
-	async function onAddMed() {
-		if (inputData.amount === '' || inputData.time === '') {
-			alert('Lütfen ilaç miktarını ve saatini giriniz.');
-			return;
+		if (fieldName === 'time') {
+			const formattedTime = formatTimeInput(text);
+			setInputData((prev) => ({
+				...prev,
+				time: formattedTime,
+			}));
+		} else {
+			setInputData((prev) => ({
+				...prev,
+				[fieldName]: text,
+			}));
 		}
-		const med = {
-			name: inputData.medName,
-			amount: inputData.amount,
-			time: inputData.time,
-		};
-		console.log(med);
+	};
+
+	const formatTimeInput = (text) => {
+		// Remove all non-numeric characters
+		const numbersOnly = text.replace(/[^\d]/g, '');
+
+		if (numbersOnly.length <= 2) {
+			// Just show hours
+			return numbersOnly;
+		} else {
+			// Format as HH:MM
+			const hours = numbersOnly.substring(0, 2);
+			const minutes = numbersOnly.substring(2, 4);
+			return `${hours}:${minutes}`;
+		}
+	};
+
+	const medData = medListData[inputData.medName];
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+	async function onAddMed() {
+		try {
+			if (inputData.amount === '' || inputData.time === '') {
+				alert('Lütfen ilaç miktarını ve saatini giriniz.');
+				return;
+			}
+			const med = {
+				name: inputData.medName,
+				amount: inputData.amount,
+				time: inputData.time,
+			};
+
+			const res = await dispatch(
+				fetchData({ url: '/addMed', method: 'POST', data: med })
+			);
+			if (res.payload.status === 200) {
+				setInputData((prev) => ({
+					...prev,
+					time: '',
+					amount: '',
+				}));
+				// todo ben hata alim sen bu kismi cozer misin diger yerlerde calisip burda sorun cikariyor
+				// navigation.navigate('Ana Ekran');
+				// navigation.reset({
+				// 	index: 0,
+				// 	routes: [{ name: 'Ana Ekran' }],
+				// });
+			}
+		} catch (error) {
+			console.log('err ', error);
+		}
 	}
 	return (
 		<View style={styles.formOuterCon}>
@@ -114,19 +162,22 @@ function AddMedForm() {
 			>
 				<TextInput
 					style={{ marginBlock: 6, width: '45%' }}
-					label='İlaç miktarı..'
+					label='Günlük miktar'
 					value={inputData.amount}
 					onChangeText={(text) => onInputChange(text, 'amount')}
+					placeholder='Günlük miktar'
 					mode='outlined'
 				/>
 				<TextInput
 					style={{ marginBlock: 6, width: '45%' }}
-					label='İlaç Saati..'
+					label='İlaç Saati...'
 					value={inputData.time}
 					onChangeText={(text) => onInputChange(text, 'time')}
 					mode='outlined'
+					maxLength={5}
 				/>
 			</View>
+
 			<Button icon='alarm-plus' mode='contained' onPress={onAddMed}>
 				Ekle
 			</Button>

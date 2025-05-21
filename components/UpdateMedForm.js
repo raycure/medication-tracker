@@ -2,22 +2,79 @@ import { StyleSheet, Text, View } from 'react-native';
 import { colors, miniTitle } from './constants/constantStyles';
 import { Image } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import medListData from '../store/medListData.json';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	deleteUserMed,
+	fetchData,
+	selectUserMeds,
+	updateUserMed,
+} from '../redux/authSlice';
 function UpdateMedForm({ medName }) {
+	const userMeds = useSelector(selectUserMeds);
+	const usersMedEntry = Object.entries(userMeds).find(
+		([key]) => key === medName
+	);
+	const usersMedValue = usersMedEntry ? usersMedEntry[1] : null;
+
 	const [inputData, setInputData] = useState({
-		amount: '',
-		time: '',
+		amount: '' || usersMedValue?.amount,
+		time: '' || usersMedValue?.time,
 	});
+	const medData = medListData[medName];
 	const onInputChange = (text, fieldName) => {
 		setInputData((prev) => ({
 			...prev,
 			[fieldName]: text,
 		}));
 	};
-	const medData = medListData[medName];
-	const onAddMed = () => {};
-	const onDeleteMed = () => {};
+
+	const dispatch = useDispatch();
+	const onUpdateMed = async () => {
+		try {
+			const response = await dispatch(
+				fetchData({
+					url: '/updateMed',
+					method: 'PUT',
+					data: { ...inputData, medName },
+				})
+			);
+			if (response.payload?.status === 200) {
+				dispatch(
+					updateUserMed({
+						name: medName,
+						...inputData,
+					})
+				);
+			}
+			console.log('res', response);
+		} catch (error) {
+			console.log('err in update: ', error);
+		}
+	};
+	const onDeleteMed = async () => {
+		try {
+			const response = await dispatch(
+				fetchData({
+					url: '/deleteMed',
+					method: 'DELETE',
+					data: { medName },
+				})
+			);
+
+			if (response.payload?.status === 200) {
+				dispatch(
+					deleteUserMed({
+						name: medName,
+						...inputData,
+					})
+				);
+			}
+		} catch (error) {
+			console.log('err in update: ', error);
+		}
+	};
 	return (
 		<View style={styles.formOuterCon}>
 			<View style={{ flexDirection: 'row' }}>
@@ -89,7 +146,7 @@ function UpdateMedForm({ medName }) {
 					icon='refresh'
 					style={{ width: '47%' }}
 					mode='contained'
-					onPress={onAddMed}
+					onPress={onUpdateMed}
 				>
 					Güncelle
 				</Button>

@@ -10,6 +10,7 @@ const initialState = {
 	error: null,
 	accessToken: null,
 	userInfo: null,
+	userMeds: {},
 };
 
 async function setupAxiosDefaults(accessToken) {
@@ -116,6 +117,28 @@ const authSlice = createSlice({
 		saveUserInfo(state, action) {
 			state.userInfo = action.payload;
 		},
+		saveUserMeds(state, action) {
+			const { name } = action.payload;
+			state.userMeds = {
+				...state.userMeds,
+				[name]: action.payload,
+			};
+		},
+		updateUserMed(state, action) {
+			const { name } = action.payload;
+			if (state.userMeds[name]) {
+				state.userMeds[name] = {
+					...state.userMeds[name],
+					...action.payload,
+				};
+			}
+		},
+		deleteUserMed(state, action) {
+			const { name } = action.payload;
+			const newUserMeds = { ...state.userMeds };
+			delete newUserMeds[name];
+			state.userMeds = newUserMeds;
+		},
 		logout(state) {
 			state.accessToken = null;
 			state.userInfo = null;
@@ -123,9 +146,17 @@ const authSlice = createSlice({
 	},
 });
 
-export const { saveAccessToken, saveUserInfo, logout } = authSlice.actions;
+export const {
+	saveAccessToken,
+	saveUserInfo,
+	logout,
+	saveUserMeds,
+	updateUserMed,
+	deleteUserMed,
+} = authSlice.actions;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectAccessToken = (state) => state.auth.accessToken;
+export const selectUserMeds = (state) => state.auth.userMeds;
 export const selectUserInfo = (state) => state.auth.userInfo;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectAuthIsSuccess = (state) => state.auth.isSuccess;

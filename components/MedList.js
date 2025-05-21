@@ -1,53 +1,51 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import MedItem from './MedItem';
 import { colors, primaryTitle } from './constants/constantStyles';
 import AddMedButton from './UI/AddMedButton';
-const myMeds = [
-	'Famodin',
-	'Metformin',
-	'Paracetamol',
-	'Ibuprofen',
-	'Amoxicillin',
-	'Setizin',
-	'Furosemid',
-	'Asprin',
-	'Wafarin',
-	'Alendronat',
-	'Amlodipin',
-	'Lisinopiril',
-	'Levotiroksin',
-	'Bisoprolol',
-	'İnsulin',
-	'Duxet',
-	'Perlinganit',
-	'Donepezil',
-	'Selectra',
-	'Spironolaktan',
-	'Pantopranzol',
-	'Levotiron',
-	'Clopidogrel',
-	'Allopurinol',
-	'Loratadin',
-	'Tamsulosin',
-	'Esomeprazol',
-	'Spylacton',
-	'Rivoksar',
-	'Omeprozol',
-	'Paxil',
-	'Lansazol',
-	'Diltiazem',
-	'Digoksin',
-	'HCTZ',
-	'Provastatin',
-	'Atorvastatin',
-	'Losartan',
-	'Nebivolol',
-	'Gabapentin',
-];
-const personalMedsData = ['button_item', ...myMeds];
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData, saveUserMeds, selectUserMeds } from '../redux/authSlice';
+
 function MedList() {
+	const [personalMedsData, setPersonalMedsData] = useState();
+
+	const initFetchUserMeds = async () => {
+		try {
+			const response = await dispatch(
+				fetchData({
+					url: '/fetchUsersMeds',
+					method: 'GET',
+				})
+			);
+			const resData = response.payload.data.userMedications;
+			const userMeds = resData.map((item) => {
+				dispatch(
+					saveUserMeds({
+						name: item.name,
+						amount: item.amount,
+						time: item.time,
+					})
+				);
+				return item.name;
+			});
+
+			const personalMedsData = ['button_item', ...userMeds];
+			setPersonalMedsData(personalMedsData);
+		} catch (error) {
+			console.log('er', err);
+		}
+	};
+	const dispatch = useDispatch();
+	useEffect(() => {
+		initFetchUserMeds();
+	}, []);
+	function test() {
+		initFetchUserMeds();
+	}
+
 	return (
 		<View style={styles.listContainer}>
+			<Button onPress={test} title='guncelle'></Button>
 			<FlatList
 				ListHeaderComponent={<Text style={primaryTitle}>İlaçlarınız</Text>}
 				style={styles.list}

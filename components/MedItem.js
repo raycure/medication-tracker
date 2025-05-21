@@ -2,8 +2,26 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import medListData from '../store/medListData.json';
 import { colors, miniTitle } from './constants/constantStyles';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import axios from '../axios';
 function MedItem({ medName }) {
-	const medData = medListData[medName];
+	const [medData, setMedData] = useState();
+
+	useEffect(() => {
+		initMedInfo();
+	}, []);
+
+	async function initMedInfo() {
+		try {
+			const { data } = await axios.get('/getMeds');
+			const meds2 = data.meds;
+			const foundMed = meds2.find((item) => item.name === medName);
+			setMedData(foundMed);
+		} catch (error) {
+			console.log('err', error);
+		}
+	}
+
 	const navigation = useNavigation();
 	if (!medData) {
 		return (
@@ -13,6 +31,7 @@ function MedItem({ medName }) {
 			</View>
 		);
 	}
+
 	return (
 		<Pressable
 			onPress={() => navigation.navigate('İlacı Düzenle', { medName: medName })}

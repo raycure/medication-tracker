@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 // import { deleteAllUsers } from './Controllers/deleteUsers.js';
 import cookieParser from 'cookie-parser';
 import Users from './models/users.js';
+import Meds from './models/meds.js';
 
 dotenv.config();
 const PORT = 3001;
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/', authRoutes);
+
 mongoose
 	.connect(process.env.MONGODB_URI)
 	.then(() => {
@@ -33,16 +35,3 @@ mongoose
 		console.log('didnt connect');
 	});
 export default app;
-
-// const router = express.Router();
-// router.delete('/deleteAllUsers', async function deleteAllUsers(req, res) {
-// 	try {
-// 		const result = await Users.deleteMany({});
-// 		console.log('All users deleted');
-// 		res.status(200).json({ message: 'All users deleted successfully', result });
-// 	} catch (error) {
-// 		console.error('Error deleting users:', error);
-// 		res.status(500).json({ error: 'Failed to delete users' });
-// 	}
-// });
-// app.use(router);
