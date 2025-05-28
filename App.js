@@ -29,6 +29,15 @@ import { fetchData, selectIsLoggedIn } from './redux/authSlice';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
+function AuthNavigator() {
+	return (
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name='Kayıt Ol' component={Enroll} />
+			<Stack.Screen name='Giriş Yap' component={Login} />
+		</Stack.Navigator>
+	);
+}
+
 function StackNavigator() {
 	const dispatch = useDispatch();
 	async function logout() {
@@ -72,7 +81,7 @@ function StackNavigator() {
 		<>
 			<Stack.Navigator>
 				<Stack.Screen
-					options={({ navigation }) => ({
+					options={() => ({
 						//headerShown: false,
 						title: 'Medify',
 						headerStyle: {
@@ -94,13 +103,7 @@ function StackNavigator() {
 					component={Home}
 					name='Ana Ekran'
 				/>
-				<Stack.Screen
-					options={{ headerShown: false }}
-					component={Enroll}
-					name='Kayıt Ol'
-				/>
 				<Stack.Screen component={Account} name='Hesabım' />
-				<Stack.Screen component={Login} name='Giriş Yap' />
 				<Stack.Screen component={ManageMedication} name='İlacı Düzenle' />
 			</Stack.Navigator>
 			<Portal>
@@ -120,72 +123,40 @@ function StackNavigator() {
 						>
 							Hesap Aktiviteleri
 						</Text>
-						{isLoggedIn === true ? (
-							<>
-								<Button
-									labelStyle={styles.menuItemLabel}
-									style={styles.menuItem}
-									onPress={() => {
-										navigation.navigate('İlaçlarım', {
-											screen: 'Hesabım',
-										});
-										closeOverlay();
-									}}
-								>
-									Hesabım
-								</Button>
-								<Divider />
-								<Button
-									labelStyle={styles.menuItemLabel}
-									style={styles.menuItem}
-									onPress={() => {
-										logout();
-										closeOverlay();
-									}}
-								>
-									Hesabımdan Çık
-								</Button>
-								<Divider />
-								<Button
-									labelStyle={styles.menuItemLabel}
-									style={styles.menuItem}
-									onPress={() => {
-										deleteUser();
-										closeOverlay();
-									}}
-								>
-									Hesabımı Sil
-								</Button>
-							</>
-						) : (
-							<>
-								<Button
-									labelStyle={styles.menuItemLabel}
-									style={styles.menuItem}
-									onPress={() => {
-										navigation.navigate('İlaçlarım', {
-											screen: 'Kayıt Ol',
-										});
-										closeOverlay();
-									}}
-								>
-									Hesap Oluştur
-								</Button>
-								<Divider />
-								<Button
-									labelStyle={styles.menuItemLabel}
-									style={styles.menuItem}
-									onPress={() => {
-										navigation.navigate('İlaçlarım', {
-											screen: 'Giriş Yap',
-										});
-										closeOverlay();
-									}}
-								>
-									Hesabıma Giriş Yap
-								</Button>
-							</>
-						)}
+						<Button
+							labelStyle={styles.menuItemLabel}
+							style={styles.menuItem}
+							onPress={() => {
+								navigation.navigate('İlaçlarım', {
+									screen: 'Hesabım',
+								});
+								closeOverlay();
+							}}
+						>
+							Hesabım
+						</Button>
+						<Divider />
+						<Button
+							labelStyle={styles.menuItemLabel}
+							style={styles.menuItem}
+							onPress={() => {
+								logout();
+								closeOverlay();
+							}}
+						>
+							Hesabımdan Çık
+						</Button>
+						<Divider />
+						<Button
+							labelStyle={styles.menuItemLabel}
+							style={styles.menuItem}
+							onPress={() => {
+								deleteUser();
+								closeOverlay();
+							}}
+						>
+							Hesabımı Sil
+						</Button>
 						<Divider />
 						<Button
 							labelStyle={styles.menuItemLabel}
@@ -200,7 +171,51 @@ function StackNavigator() {
 		</>
 	);
 }
-
+function LoginChecker() {
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	useEffect(() => {
+		console.log('isLoggedIn in App.js', isLoggedIn);
+	}, [isLoggedIn]);
+	return (
+		<>
+			{isLoggedIn ? (
+				<BottomTabs.Navigator
+					screenOptions={() => ({
+						headerShown: false,
+						tabBarStyle: {
+							backgroundColor: colors.primary300,
+							height: 70,
+						},
+						tabBarActiveTintColor: 'white',
+						tabBarInactiveTintColor: colors.primary200,
+						tabBarLabelStyle: { fontWeight: 'bold', fontSize: 16 },
+					})}
+				>
+					<BottomTabs.Screen
+						options={{
+							tabBarIcon: ({ color, size }) => (
+								<Ionicons name='home' size={size} color={color} />
+							),
+						}}
+						component={StackNavigator}
+						name='İlaçlarım'
+					/>
+					<BottomTabs.Screen
+						options={{
+							tabBarIcon: ({ color, size }) => (
+								<Ionicons name='add' size={size} color={color} />
+							),
+						}}
+						component={AddMedication}
+						name='İlaç Ekle'
+					/>
+				</BottomTabs.Navigator>
+			) : (
+				<AuthNavigator />
+			)}
+		</>
+	);
+}
 export default function App() {
 	const theme = {
 		...DefaultTheme,
@@ -210,6 +225,7 @@ export default function App() {
 			secondary: colors.primary100,
 		},
 	};
+
 	return (
 		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
@@ -217,37 +233,7 @@ export default function App() {
 					<StatusBar style='auto' />
 					<PaperProvider theme={theme}>
 						<NavigationContainer>
-							<BottomTabs.Navigator
-								screenOptions={() => ({
-									headerShown: false,
-									tabBarStyle: {
-										backgroundColor: colors.primary300,
-										height: 70,
-									},
-									tabBarActiveTintColor: 'white',
-									tabBarInactiveTintColor: colors.primary200,
-									tabBarLabelStyle: { fontWeight: 'bold', fontSize: 16 },
-								})}
-							>
-								<BottomTabs.Screen
-									options={{
-										tabBarIcon: ({ color, size }) => (
-											<Ionicons name='home' size={size} color={color} />
-										),
-									}}
-									component={StackNavigator}
-									name='İlaçlarım'
-								/>
-								<BottomTabs.Screen
-									options={{
-										tabBarIcon: ({ color, size }) => (
-											<Ionicons name='add' size={size} color={color} />
-										),
-									}}
-									component={AddMedication}
-									name='İlaç Ekle'
-								/>
-							</BottomTabs.Navigator>
+							<LoginChecker />
 						</NavigationContainer>
 					</PaperProvider>
 				</SafeAreaView>

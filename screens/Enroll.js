@@ -72,10 +72,11 @@ function Enroll() {
 				const accessToken = response.payload.data.accessToken;
 				if (accessToken) {
 					dispatch(saveAccessToken(accessToken));
-					navigation.navigate('Ana Ekran');
+					//navigation.navigate('Ana Ekran');
 					navigation.reset({
 						index: 0,
-						routes: [{ name: 'Ana Ekran' }],
+						routes: [{ name: 'İlaçlarım' }],
+						//routes: [{ name: 'Ana Ekran' }],
 					});
 				}
 			}
@@ -117,6 +118,13 @@ function Enroll() {
 					}
 				/>
 			</View>
+			<Button
+				onPress={() => {
+					navigation.navigate('Giriş Yap');
+				}}
+			>
+				Hesabım var
+			</Button>
 			<Button
 				icon='arrow-right-thick'
 				style={{
