@@ -25,7 +25,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Button } from 'react-native-paper';
 import axios from './axios';
 import { useSelector } from 'react-redux';
-import { fetchData, selectIsLoggedIn } from './redux/authSlice';
+import {
+	deleteAllUserMeds,
+	deleteUserMed,
+	fetchData,
+	selectIsLoggedIn,
+} from './redux/authSlice';
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -54,11 +59,9 @@ function StackNavigator() {
 
 	async function deleteUser() {
 		try {
-			console.log('deleteUser pressed');
 			const response = await dispatch(
 				fetchData({ data: {}, method: 'DELETE', url: '/deleteAccount' })
 			);
-			console.log('response', response);
 		} catch (error) {
 			console.error('Error deleting user:', error);
 		}

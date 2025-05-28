@@ -9,6 +9,9 @@ dotenv.config();
 const register = async (req, res) => {
 	try {
 		const { mail, weight, height, name, yob, password } = req.body;
+
+		console.log('register controller called');
+
 		const existingUser = await Users.findOne({ mail });
 		if (existingUser) {
 			return res.status(409).json({
