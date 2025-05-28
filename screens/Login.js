@@ -12,7 +12,6 @@ function Login() {
 	const [userInfo, setUserInfo] = useState({
 		mail: '',
 		password: '',
-		time: '', //silincek xxxxx
 	});
 	const onInputChange = (text, fieldName) => {
 		setUserInfo((prev) => ({
@@ -90,17 +89,6 @@ function Login() {
 					onPress={onSave}
 				>
 					Giriş Yap
-				</Button>
-			</View>
-			<View style={{ flexDirection: 'row' }}>
-				<TextInput
-					style={{ marginBlock: 6 }}
-					autoCapitalize='none'
-					value={userInfo.time}
-					onChangeText={(text) => onInputChange(text, 'time')}
-				/>
-				<Button style={{ marginBlock: 12 }} mode='contained' onPress={() => {}}>
-					test notif
 				</Button>
 			</View>
 		</ScreenContainer>
