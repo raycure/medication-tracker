@@ -16,10 +16,14 @@ const initialState = {
 async function setupAxiosDefaults(accessToken) {
 	console.log('setupAxiosDefaults is called', accessToken);
 
-	if (accessToken) {
-		axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-	} else {
-		delete axios.defaults.headers.common['Authorization'];
+	try {
+		if (accessToken) {
+			axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+		} else {
+			delete axios.defaults.headers.common['Authorization'];
+		}
+	} catch (error) {
+		console.log('the err in setupAxiosDefaults: ', error);
 	}
 }
 
@@ -32,6 +36,8 @@ export const fetchData = createAsyncThunk(
 	) => {
 		try {
 			const accessToken = getState().auth.accessToken;
+			console.log('accessToken: in thunk: ', accessToken);
+
 			await setupAxiosDefaults(accessToken);
 
 			const response = await axios({
@@ -39,6 +45,8 @@ export const fetchData = createAsyncThunk(
 				data: method !== 'GET' ? data : undefined,
 				method,
 			});
+			console.log('response', response);
+
 			const isAccessTokenRefresh =
 				response.headers && response.headers['x-refreshed-token'];
 			console.log('isAccessTokenRefresh', isAccessTokenRefresh);
@@ -139,6 +147,9 @@ const authSlice = createSlice({
 			delete newUserMeds[name];
 			state.userMeds = newUserMeds;
 		},
+		deleteAllUserMeds(state, action) {
+			state.userMeds = {};
+		},
 		logout(state) {
 			state.accessToken = null;
 			state.userInfo = null;
@@ -153,6 +164,7 @@ export const {
 	saveUserMeds,
 	updateUserMed,
 	deleteUserMed,
+	deleteAllUserMeds,
 } = authSlice.actions;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectAccessToken = (state) => state.auth.accessToken;
